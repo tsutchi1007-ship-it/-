@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>何をやってもビジネスがうまくいかない方へ | おおぞら</title>
+<style>
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --coral-600: #993C1D;
+    --coral-800: #712B13;
+    --amber-400: #BA7517;
+    --gray-100: #F1EFE8;
+    --gray-400: #888780;
+    --gray-800: #444441;
+    --text-primary: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --text-tertiary: #888780;
+    --border: rgba(0,0,0,0.1);
+    --border-md: rgba(0,0,0,0.15);
+    --bg-page: #F8F8F6;
+    --bg-white: #ffffff;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.7; font-size: 15px; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .nav-logo span { color: var(--purple-600); }
+  .nav-cta { display: inline-block; padding: 8px 20px; background: var(--purple-600); color: var(--purple-50); border-radius: var(--radius-md); font-size: 13px; font-weight: 600; transition: background 0.15s; }
+  .nav-cta:hover { background: var(--purple-800); }
+
+  .section { padding: 64px 24px; max-width: 720px; margin: 0 auto; }
+  .section-inner { max-width: 640px; margin: 0 auto; }
+
+  .headline { font-size: clamp(22px, 4vw, 30px); font-weight: 700; line-height: 1.45; letter-spacing: -0.02em; margin-bottom: 14px; color: var(--text-primary); }
+  .headline em { font-style: normal; color: var(--purple-600); }
+  .subline { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 28px; }
+
+  .empathy-list { margin-bottom: 24px; }
+  .empathy-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 0.5px solid var(--border); font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+  .empathy-item:last-child { border-bottom: none; }
+  .em-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple-400); margin-top: 8px; flex-shrink: 0; }
+
+  .core-box { background: var(--bg-white); border: 1px solid var(--purple-200); border-left: 4px solid var(--purple-600); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 18px 20px; }
+  .core-text { font-size: 15px; font-weight: 600; color: var(--purple-800); line-height: 1.7; }
+
+  .sec-problem { background: var(--purple-50); }
+  .sec-affinity { background: var(--bg-white); }
+  .sec-solution { background: var(--gray-100); }
+  .sec-offer { background: var(--bg-white); }
+  .sec-narrow { background: var(--gray-100); }
+  .sec-action { background: var(--purple-900); }
+
+  .story-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+  .story-text strong { font-weight: 600; color: var(--text-primary); }
+  .turn-box { background: var(--teal-50); border-left: 4px solid var(--teal-600); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 16px 18px; margin-top: 16px; }
+  .turn-text { font-size: 14px; color: var(--teal-800); line-height: 1.8; }
+  .tags-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; border: 0.5px solid var(--border-md); color: var(--text-secondary); background: var(--bg-white); }
+
+  .block { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .block-label { font-size: 10px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .block-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.5; }
+  .block-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+  .arrow-center { text-align: center; font-size: 20px; color: var(--text-tertiary); padding: 6px 0; margin: 2px 0; }
+
+  .qualia-box { background: var(--purple-50); border: 1px solid var(--purple-200); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 14px; }
+  .qualia-label { font-size: 10px; font-weight: 700; color: var(--purple-600); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .qualia-title { font-size: 17px; font-weight: 700; color: var(--purple-800); line-height: 1.5; margin-bottom: 12px; }
+  .qualia-text { font-size: 14px; color: var(--purple-600); line-height: 1.8; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .c-card { border-radius: var(--radius-md); padding: 16px; }
+  .c-ng { background: var(--coral-50); border: 0.5px solid var(--coral-100); }
+  .c-ok { background: var(--teal-50); border: 0.5px solid var(--teal-100); }
+  .c-label { font-size: 11px; font-weight: 700; margin-bottom: 10px; }
+  .c-ng .c-label { color: var(--coral-800); }
+  .c-ok .c-label { color: var(--teal-800); }
+  .c-item { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .c-item:last-child { border-bottom: none; }
+
+  .method-box { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .method-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+  .m-step { display: flex; align-items: flex-start; gap: 14px; }
+  .m-num { width: 26px; height: 26px; border-radius: 50%; background: var(--purple-50); border: 1.5px solid var(--purple-200); color: var(--purple-600); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .m-text { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+  .m-text strong { font-weight: 600; color: var(--text-primary); }
+
+  .result-box { background: var(--bg-white); border: 2px solid var(--purple-600); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 14px; }
+  .result-label { font-size: 10px; font-weight: 700; color: var(--purple-600); letter-spacing: 0.08em; margin-bottom: 12px; }
+  .result-stat { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .result-num { font-size: 40px; font-weight: 800; color: var(--purple-600); line-height: 1; }
+  .result-unit { font-size: 15px; color: var(--purple-400); font-weight: 600; }
+  .result-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+  .easy-box { background: var(--teal-50); border-radius: var(--radius-md); padding: 16px 18px; margin-bottom: 20px; }
+  .easy-text { font-size: 14px; color: var(--teal-800); line-height: 1.8; }
+  .easy-text strong { font-weight: 700; }
+
+  .video-cta { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; text-align: center; }
+  .video-cta-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+  .video-cta-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.65; }
+  .btn-primary { display: inline-block; padding: 12px 30px; background: var(--purple-600); color: var(--purple-50); border-radius: var(--radius-md); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+  .btn-primary:hover { background: var(--purple-800); }
+  .btn-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; }
+
+  .offer-card { border: 2px solid var(--purple-600); border-radius: var(--radius-lg); padding: 24px 26px; background: var(--bg-white); margin-bottom: 16px; }
+  .offer-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--purple-800); background: var(--purple-50); padding: 3px 12px; border-radius: 100px; margin-bottom: 12px; }
+  .offer-name { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .offer-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 18px; }
+  .offer-price-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+  .offer-price { font-size: 32px; font-weight: 800; color: var(--purple-600); margin-bottom: 16px; line-height: 1; }
+  .offer-price span { font-size: 14px; font-weight: 400; color: var(--text-tertiary); }
+  .offer-features { margin-bottom: 20px; }
+  .offer-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); }
+  .offer-feat:last-child { border-bottom: none; }
+  .feat-check { color: var(--teal-600); font-size: 16px; font-weight: 700; flex-shrink: 0; }
+
+  .narrow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .narrow-card { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 18px; }
+  .narrow-title { font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+  .nt-yes { color: var(--teal-600); }
+  .nt-no { color: var(--coral-600); }
+  .narrow-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); line-height: 1.55; }
+  .narrow-item:last-child { border-bottom: none; }
+  .ni-check { color: var(--teal-600); font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .ni-x { color: var(--coral-600); font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .t-card { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; }
+  .t-stars { color: var(--amber-400); font-size: 13px; margin-bottom: 8px; }
+  .t-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
+  .t-name { font-size: 11px; color: var(--text-tertiary); }
+
+  .sec-action .section-inner { text-align: center; }
+  .cta-headline { font-size: clamp(20px, 3.5vw, 26px); font-weight: 700; color: #ffffff; line-height: 1.5; margin-bottom: 10px; }
+  .cta-sub { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 28px; line-height: 1.75; }
+  .btn-cta { display: inline-block; padding: 16px 40px; background: #ffffff; color: var(--purple-800); border-radius: var(--radius-md); font-size: 16px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; margin-bottom: 10px; }
+  .btn-cta:hover { opacity: 0.92; }
+  .btn-note { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  .faq { margin-top: 40px; text-align: left; }
+  .faq-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 16px; letter-spacing: 0.05em; }
+  .faq-item { padding: 14px 0; border-bottom: 0.5px solid rgba(255,255,255,0.12); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+
+  footer { background: var(--gray-800); padding: 24px; text-align: center; }
+  .footer-text { font-size: 12px; color: var(--gray-400); }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 10px; }
+  .footer-link { font-size: 12px; color: var(--gray-400); }
+
+  @media (max-width: 520px) {
+    .compare, .narrow-grid, .testimonials { grid-template-columns: 1fr; }
+    .nav-logo { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">おおぞら｜<span>心理×ビジネス</span></div>
+  <a href="#action" class="nav-cta">無料動画を受け取る</a>
+</nav>
+
+<!-- P: Problem -->
+<div class="sec-problem">
+  <div class="section">
+    <div class="section-inner">
+      <h1 class="headline">学んでも、やっても、<br><em>なぜかビジネスだけが<br>うまくいかない。</em></h1>
+      <p class="subline">集客の方法も学んだ。コンテンツも作った。SNSも発信した。それでも成果が出ない——その理由は「やり方」でも「センス」でも「努力の量」でもありません。</p>
+      <div style="border:2px solid var(--purple-200);border-radius:var(--radius-md);padding:20px 22px;margin-bottom:24px;background:var(--bg-white);">
+        <div style="font-size:13px;font-weight:700;color:var(--purple-800);margin-bottom:14px;letter-spacing:0.03em;">こんな経験、ありませんか？</div>
+        <div class="empathy-list" style="margin-bottom:0;">
+          <div class="empathy-item"><div class="em-dot"></div>集客の講座を受けたのに、なぜか自分だけ成果が出ない</div>
+          <div class="empathy-item"><div class="em-dot"></div>発信は続けているのに、反応がほとんどない</div>
+          <div class="empathy-item"><div class="em-dot"></div>「私にはビジネスの才能がないのかも」と思い始めている</div>
+          <div class="empathy-item"><div class="em-dot"></div>次々と新しい方法を試すけれど、どれも続かない</div>
+        </div>
+      </div>
+      <div class="core-box">
+        <p class="core-text">これはやり方の問題でも、センスの問題でもありません。「まだ足りない」「うまくいかなかったらどうしよう」という潜在意識の不足感が、ビジネスの成果を遠ざけているのです。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Affinity -->
+<div class="sec-affinity">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:16px;line-height:1.5;">私も、何をやっても<br>うまくいかない時期がありました。</h2>
+      <p class="story-text">発信も継続した。学びも惜しまなかった。でも成果が出ない。<strong>「私には向いていないのかも」</strong>——そう思いながらも、また新しい方法を探し続けていました。</p>
+      <div class="turn-box">
+        <p class="turn-text">転換点は、「やり方」ではなく「やっているときの自分の状態」を見たときでした。「うまくいくだろうか」という不安を抱えたまま発信していた。その状態自体が、成果を遠ざけていたとわかったとき、ビジネスが動き始めました。</p>
+      </div>
+      <div class="tags-row">
+        <span class="tag">心理学研究者</span>
+        <span class="tag">潜在意識コーチング</span>
+        <span class="tag">個人ビジネス支援</span>
+        <span class="tag">コミュニティ運営</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S: Solution -->
+<div class="sec-solution">
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="headline" style="font-size:clamp(20px,3.5vw,26px);">成果が出ない原因は「方法」でも「努力量」でもない。<br><em>行動するときの「心の状態」が、すべての結果を決めている。</em></h2>
+      <p class="subline">いくら学んで行動しても成果が出ない。その根っこには、もっと深いところにある「心の状態」が関係しています。</p>
+
+      <div class="block">
+        <div class="block-label">問題の構造</div>
+        <div class="block-title">「うまくいかなかったらどうしよう」という不安が、行動の効果をゼロにする</div>
+        <p class="block-text">集客や発信をするとき、「この投稿でフォロワーが増えなかったら」「この商品が売れなかったら」という不安を抱えていませんか？この「不足の状態」で行動すると、言葉に焦りが滲み、相手に伝わらなくなります。<br><br>どんなに正しい方法を使っても、不安を抱えたまま行動すれば、その不安がそのまま発信に乗る。だからいくら学んでも成果が出ない——これは方法の問題ではなく、心の状態の問題なのです。</p>
+      </div>
+
+      <div class="arrow-center">↓</div>
+
+      <div class="qualia-box">
+        <div class="qualia-label">鍵となる概念 — クオリア</div>
+        <div class="qualia-title">「うまくいかなくても大丈夫」という状態が、<br>ビジネスを自然に動かし始める</div>
+        <p class="qualia-text">クオリアとは、主観的な「体験の質」のこと。ビジネスにおいてクオリアが上がった状態とは——「今すぐ成果が出なくても大丈夫」という感覚です。<br><br>この状態になると、発信がただの発信になります。「売れるかどうか」ではなく「伝えたいことを伝える」だけ。その余裕と純度こそが、見ている人の心を動かし、自然と成果を生み出すのです。</p>
+      </div>
+
+      <div class="compare">
+        <div class="c-card c-ng">
+          <div class="c-label">クオリアが低い状態</div>
+          <div class="c-item">「売れなかったらどうしよう」で発信する</div>
+          <div class="c-item">言葉に焦りと圧が滲んでしまう</div>
+          <div class="c-item">方法を次々と変えて安定しない</div>
+          <div class="c-item">学んでも学んでも成果につながらない</div>
+        </div>
+        <div class="c-card c-ok">
+          <div class="c-label">クオリアが高い状態</div>
+          <div class="c-item">「伝えたいから伝える」で発信できる</div>
+          <div class="c-item">言葉に余裕と純度が出る</div>
+          <div class="c-item">同じ方法でも効果が変わり始める</div>
+          <div class="c-item">学んだことが素直に成果に乗る</div>
+        </div>
+      </div>
+
+      <div class="arrow-center">↓</div>
+
+      <div class="method-box">
+        <div class="block-label">解決策</div>
+        <div class="block-title">意志の力を使わずに、不安の根っこを書き換える</div>
+        <p class="block-text">「うまくいくかどうか不安」という感覚は、ポジティブに考えようとしても消えません。表面を塗り替えるだけで、根っこは残り続けます。だから必要なのは「根っこから外す方法」です。</p>
+        <div class="method-steps">
+          <div class="m-step">
+            <div class="m-num">1</div>
+            <div class="m-text"><strong>たった一つのトレーニングをただ続けるだけ</strong><br>複雑な手順は不要。シンプルな方法を繰り返すことで、潜在意識の不安が自然に緩んでいきます。</div>
+          </div>
+          <div class="m-step">
+            <div class="m-num">2</div>
+            <div class="m-text"><strong>「足りない」という癖を外す</strong><br>問題は方法でも努力量でもなく習慣。この癖に気づいて手放すだけで、同じ行動でも結果が変わり始めます。</div>
+          </div>
+          <div class="m-step">
+            <div class="m-num">3</div>
+            <div class="m-text"><strong>早い人は1日で変化を感じられる</strong><br>難しいことは何もありません。やり続けるだけで、自然体でビジネスに向き合える自分が現れてきます。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="result-label">実績 — おおぞら自身の変化</div>
+        <div class="result-stat">
+          <div class="result-num">0</div>
+          <div class="result-unit">ビジネスへの不安と焦り</div>
+        </div>
+        <p class="result-text">「うまくいかなくても大丈夫」という状態でビジネスに向き合えるようになったとき、発信の質が変わりました。同じ方法でも、言葉に乗るものが違う。その変化を感じたとき、自然と成果がついてきました。</p>
+      </div>
+
+      <div class="easy-box">
+        <p class="easy-text"><strong>本当に簡単です。</strong> 新しいスキルも、高額な講座も必要ありません。ただ一つのことをやり続けるだけ。それだけで、不安なく行動できる自分が現れてきます。</p>
+      </div>
+
+      <div class="video-cta">
+        <div class="video-cta-title">まず無料動画で「クオリアとビジネス成果」の全体像を掴む</div>
+        <div class="video-cta-sub">なぜ学んでも成果が出ないのか、何をどう変えればいいか、具体的な方法を動画で解説しています。</div>
+        <a href="#action" class="btn-primary">無料動画を今すぐ受け取る</a>
+        <div class="btn-sub">登録1分・しつこい営業は一切ありません</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- O: Offer -->
+<div class="sec-offer">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:8px;line-height:1.5;">無料動画で学んだあと、<br>さらに深めたい方へ</h2>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;line-height:1.8;">動画教材では、潜在意識×不安×ビジネス成果の関係を体系的に解説。実際に不足感を外すトレーニングも収録しています。</p>
+      <div class="offer-card">
+        <div class="offer-tag">動画教材</div>
+        <div class="offer-name">学んでも成果が出ない人のための 心の状態リセットプログラム</div>
+        <p class="offer-desc">潜在意識の不安と不足感を心理学で解体し、自然体でビジネスに取り組める状態を作る動画講座。クオリアを高めるトレーニング音声も収録。</p>
+        <div class="offer-price-label">価格</div>
+        <div class="offer-price">¥〇〇,000 <span>（税込）</span></div>
+        <div class="offer-features">
+          <div class="offer-feat"><span class="feat-check">✓</span> 無期限視聴・追加費用なし</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 潜在意識トレーニング音声データ付き</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 集客・発信・販売すべてに対応</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 購入後7日間返金保証</div>
+        </div>
+        <a href="#action" class="btn-primary" style="display:block;text-align:center;padding:14px;">教材を購入する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- N: Narrowing -->
+<div class="sec-narrow">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:20px;line-height:1.5;">こんな方のために作りました</h2>
+      <div class="narrow-grid">
+        <div class="narrow-card">
+          <div class="narrow-title nt-yes">✓ こんな人に向いています</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>学んでも成果が出ないと感じている</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>発信しているのに反応がない</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>不安を抱えながら行動している自覚がある</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>方法を変えても状況が変わらない</div>
+        </div>
+        <div class="narrow-card">
+          <div class="narrow-title nt-no">✗ こんな方には向きません</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>新しい集客テクニックを探している</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>SNSのアルゴリズム攻略法を求めている</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>心の状態が原因だと思っていない</div>
+        </div>
+      </div>
+      <div class="testimonials">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">「なぜ自分だけ成果が出ないのかずっと悩んでいました。方法じゃなくて、やっているときの状態が問題だったんですね。腑に落ちた瞬間、発信が変わりました。」</p>
+          <div class="t-name">— Aさん（30代・フリーランス）</div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">「何十万もかけて学んでも成果が出なかった。でも心の状態を整えるだけで、同じことをやっているのに流れが変わった。もっと早く知りたかったです。」</p>
+          <div class="t-name">— Bさん（40代・個人事業主）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Action -->
+<div class="sec-action" id="action">
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="cta-headline">まず、無料動画で<br>「学んでも成果が出ない本当の理由」を知ってください。</h2>
+      <p class="cta-sub">メールアドレスを登録するだけ。すぐに視聴できます。<br>しつこいセールスは一切しません。</p>
+      <a href="#" class="btn-cta">無料動画を今すぐ受け取る</a>
+      <div class="btn-note">登録1分・いつでも解除できます</div>
+
+      <div class="faq">
+        <div class="faq-title">よくある質問</div>
+        <div class="faq-item">
+          <div class="faq-q">どんなビジネス形態でも使えますか？</div>
+          <p class="faq-a">はい。「心の状態」が根本にあるため、コーチング・コンサル・物販・サービス業など、業種・形態を問わず活用できます。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">今まで学んできた知識は無駄になりますか？</div>
+          <p class="faq-a">なりません。心の状態が整うことで、これまで学んできた方法が本来の力を発揮し始めます。学びの上に乗せるイメージです。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">心理学の知識がなくてもわかりますか？</div>
+          <p class="faq-a">専門知識は不要です。実際の体験談をもとに、日常の言葉でわかりやすく解説しています。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">どのくらいで変化を感じられますか？</div>
+          <p class="faq-a">個人差はありますが、早い方は1日で変化を感じていただけます。難しいことは何もなく、一つのことを続けるだけです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="#" class="footer-link">プライバシーポリシー</a>
+    <a href="#" class="footer-link">特定商取引法に基づく表記</a>
+    <a href="contact.html" class="footer-link">お問い合わせ</a>
+  </div>
+  <div class="footer-text">© 2025 おおぞら</div>
+</footer>
+
+</body>
+</html>
