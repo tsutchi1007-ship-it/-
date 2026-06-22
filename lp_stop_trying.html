@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>もう頑張らなくていい | おおぞら</title>
+<style>
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --coral-600: #993C1D;
+    --coral-800: #712B13;
+    --amber-400: #BA7517;
+    --gray-100: #F1EFE8;
+    --gray-400: #888780;
+    --gray-800: #444441;
+    --text-primary: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --text-tertiary: #888780;
+    --border: rgba(0,0,0,0.1);
+    --border-md: rgba(0,0,0,0.15);
+    --bg-page: #F8F8F6;
+    --bg-white: #ffffff;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.7; font-size: 15px; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .nav-logo span { color: var(--purple-600); }
+  .nav-cta { display: inline-block; padding: 8px 20px; background: var(--purple-600); color: var(--purple-50); border-radius: var(--radius-md); font-size: 13px; font-weight: 600; transition: background 0.15s; }
+  .nav-cta:hover { background: var(--purple-800); }
+
+  .section { padding: 64px 24px; max-width: 720px; margin: 0 auto; }
+  .section-inner { max-width: 640px; margin: 0 auto; }
+
+  .headline { font-size: clamp(22px, 4vw, 30px); font-weight: 700; line-height: 1.45; letter-spacing: -0.02em; margin-bottom: 14px; color: var(--text-primary); }
+  .headline em { font-style: normal; color: var(--purple-600); }
+  .subline { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 28px; }
+
+  .empathy-list { margin-bottom: 24px; }
+  .empathy-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 0.5px solid var(--border); font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+  .empathy-item:last-child { border-bottom: none; }
+  .em-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple-400); margin-top: 8px; flex-shrink: 0; }
+
+  .core-box { background: var(--bg-white); border: 1px solid var(--purple-200); border-left: 4px solid var(--purple-600); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 18px 20px; }
+  .core-text { font-size: 15px; font-weight: 600; color: var(--purple-800); line-height: 1.7; }
+
+  .sec-problem { background: var(--purple-50); }
+  .sec-affinity { background: var(--bg-white); }
+  .sec-solution { background: var(--gray-100); }
+  .sec-offer { background: var(--bg-white); }
+  .sec-narrow { background: var(--gray-100); }
+  .sec-action { background: var(--purple-900); }
+
+  .story-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+  .story-text strong { font-weight: 600; color: var(--text-primary); }
+  .turn-box { background: var(--teal-50); border-left: 4px solid var(--teal-600); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 16px 18px; margin-top: 16px; }
+  .turn-text { font-size: 14px; color: var(--teal-800); line-height: 1.8; }
+  .tags-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; border: 0.5px solid var(--border-md); color: var(--text-secondary); background: var(--bg-white); }
+
+  .block { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .block-label { font-size: 10px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .block-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.5; }
+  .block-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+  .arrow-center { text-align: center; font-size: 20px; color: var(--text-tertiary); padding: 6px 0; margin: 2px 0; }
+
+  .qualia-box { background: var(--purple-50); border: 1px solid var(--purple-200); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 14px; }
+  .qualia-label { font-size: 10px; font-weight: 700; color: var(--purple-600); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .qualia-title { font-size: 17px; font-weight: 700; color: var(--purple-800); line-height: 1.5; margin-bottom: 12px; }
+  .qualia-text { font-size: 14px; color: var(--purple-600); line-height: 1.8; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .c-card { border-radius: var(--radius-md); padding: 16px; }
+  .c-ng { background: var(--coral-50); border: 0.5px solid var(--coral-100); }
+  .c-ok { background: var(--teal-50); border: 0.5px solid var(--teal-100); }
+  .c-label { font-size: 11px; font-weight: 700; margin-bottom: 10px; }
+  .c-ng .c-label { color: var(--coral-800); }
+  .c-ok .c-label { color: var(--teal-800); }
+  .c-item { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .c-item:last-child { border-bottom: none; }
+
+  .method-box { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .method-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+  .m-step { display: flex; align-items: flex-start; gap: 14px; }
+  .m-num { width: 26px; height: 26px; border-radius: 50%; background: var(--purple-50); border: 1.5px solid var(--purple-200); color: var(--purple-600); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .m-text { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+  .m-text strong { font-weight: 600; color: var(--text-primary); }
+
+  .result-box { background: var(--bg-white); border: 2px solid var(--purple-600); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 14px; }
+  .result-label { font-size: 10px; font-weight: 700; color: var(--purple-600); letter-spacing: 0.08em; margin-bottom: 12px; }
+  .result-stat { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .result-num { font-size: 40px; font-weight: 800; color: var(--purple-600); line-height: 1; }
+  .result-unit { font-size: 15px; color: var(--purple-400); font-weight: 600; }
+  .result-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+  .easy-box { background: var(--teal-50); border-radius: var(--radius-md); padding: 16px 18px; margin-bottom: 20px; }
+  .easy-text { font-size: 14px; color: var(--teal-800); line-height: 1.8; }
+  .easy-text strong { font-weight: 700; }
+
+  .video-cta { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; text-align: center; }
+  .video-cta-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+  .video-cta-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.65; }
+  .btn-primary { display: inline-block; padding: 12px 30px; background: var(--purple-600); color: var(--purple-50); border-radius: var(--radius-md); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+  .btn-primary:hover { background: var(--purple-800); }
+  .btn-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; }
+
+  .offer-card { border: 2px solid var(--purple-600); border-radius: var(--radius-lg); padding: 24px 26px; background: var(--bg-white); margin-bottom: 16px; }
+  .offer-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--purple-800); background: var(--purple-50); padding: 3px 12px; border-radius: 100px; margin-bottom: 12px; }
+  .offer-name { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .offer-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 18px; }
+  .offer-price-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+  .offer-price { font-size: 32px; font-weight: 800; color: var(--purple-600); margin-bottom: 16px; line-height: 1; }
+  .offer-price span { font-size: 14px; font-weight: 400; color: var(--text-tertiary); }
+  .offer-features { margin-bottom: 20px; }
+  .offer-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); }
+  .offer-feat:last-child { border-bottom: none; }
+  .feat-check { color: var(--teal-600); font-size: 16px; font-weight: 700; flex-shrink: 0; }
+
+  .narrow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .narrow-card { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 18px; }
+  .narrow-title { font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+  .nt-yes { color: var(--teal-600); }
+  .nt-no { color: var(--coral-600); }
+  .narrow-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); line-height: 1.55; }
+  .narrow-item:last-child { border-bottom: none; }
+  .ni-check { color: var(--teal-600); font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .ni-x { color: var(--coral-600); font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .t-card { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; }
+  .t-stars { color: var(--amber-400); font-size: 13px; margin-bottom: 8px; }
+  .t-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
+  .t-name { font-size: 11px; color: var(--text-tertiary); }
+
+  .sec-action .section-inner { text-align: center; }
+  .cta-headline { font-size: clamp(20px, 3.5vw, 26px); font-weight: 700; color: #ffffff; line-height: 1.5; margin-bottom: 10px; }
+  .cta-sub { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 28px; line-height: 1.75; }
+  .btn-cta { display: inline-block; padding: 16px 40px; background: #ffffff; color: var(--purple-800); border-radius: var(--radius-md); font-size: 16px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; margin-bottom: 10px; }
+  .btn-cta:hover { opacity: 0.92; }
+  .btn-note { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  .faq { margin-top: 40px; text-align: left; }
+  .faq-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 16px; letter-spacing: 0.05em; }
+  .faq-item { padding: 14px 0; border-bottom: 0.5px solid rgba(255,255,255,0.12); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+
+  footer { background: var(--gray-800); padding: 24px; text-align: center; }
+  .footer-text { font-size: 12px; color: var(--gray-400); }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 10px; }
+  .footer-link { font-size: 12px; color: var(--gray-400); }
+
+  @media (max-width: 520px) {
+    .compare, .narrow-grid, .testimonials { grid-template-columns: 1fr; }
+    .nav-logo { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">おおぞら｜<span>心理×潜在意識</span></div>
+  <a href="#action" class="nav-cta">無料動画を受け取る</a>
+</nav>
+
+<!-- P: Problem -->
+<div class="sec-problem">
+  <div class="section">
+    <div class="section-inner">
+      <h1 class="headline">もう、頑張らなくていい。<br><em>頑張ることに<br>疲れ果てたあなたへ。</em></h1>
+      <p class="subline">ずっと努力してきた。我慢もした。それでも「まだ足りない」「もっと頑張らないと」という声が止まらない——その消耗は、努力が足りないせいではありません。頑張ることをやめられない潜在意識の癖が原因です。</p>
+      <div style="border:2px solid var(--purple-200);border-radius:var(--radius-md);padding:20px 22px;margin-bottom:24px;background:var(--bg-white);">
+        <div style="font-size:13px;font-weight:700;color:var(--purple-800);margin-bottom:14px;letter-spacing:0.03em;">こんな感覚、ありませんか？</div>
+        <div class="empathy-list" style="margin-bottom:0;">
+          <div class="empathy-item"><div class="em-dot"></div>頑張っているのに、報われている感覚がない</div>
+          <div class="empathy-item"><div class="em-dot"></div>休もうとすると「これでいいのか」と罪悪感が出る</div>
+          <div class="empathy-item"><div class="em-dot"></div>「頑張らないと手に入らない」がもう信じられなくなってきた</div>
+          <div class="empathy-item"><div class="em-dot"></div>力を抜いた状態でうまくいくことが想像できない</div>
+        </div>
+      </div>
+      <div class="core-box">
+        <p class="core-text">これは努力が足りないせいではありません。「頑張らないといけない」「手を抜いたら全部崩れる」という潜在意識の不足感が、あなたを休ませてくれないのです。この癖を外さない限り、何をやっても消耗は続きます。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Affinity -->
+<div class="sec-affinity">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:16px;line-height:1.5;">私も、頑張ることを<br>やめられない時期がありました。</h2>
+      <p class="story-text">休んでいると不安になる。手を抜くと怖い。頑張り続けることが「正しい」と信じていた。でもどこかで気づいていました。<strong>「このままでは、いつか限界が来る」</strong>と。</p>
+      <div class="turn-box">
+        <p class="turn-text">転換点は、頑張ることをやめようとするのをやめたときでした。「頑張らなきゃ」という感覚そのものを、潜在意識のレベルから解体する——それだけで、何もしなくても物事が動き始める世界が見えてきました。</p>
+      </div>
+      <div class="tags-row">
+        <span class="tag">心理学研究者</span>
+        <span class="tag">潜在意識コーチング</span>
+        <span class="tag">自己解放</span>
+        <span class="tag">コミュニティ運営</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S: Solution -->
+<div class="sec-solution">
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="headline" style="font-size:clamp(20px,3.5vw,26px);">「頑張れば報われる」は本当か。<br><em>頑張ることをやめられない根っこは、<br>努力ではなく潜在意識にある。</em></h2>
+      <p class="subline">いくら休もうとしても、頑張ることをやめられない。その根っこには、深いところにある「心の癖」が関係しています。</p>
+
+      <div class="block">
+        <div class="block-label">問題の構造</div>
+        <div class="block-title">「頑張らないと手に入らない」という信念が、消耗を止められなくしている</div>
+        <p class="block-text">「もっとやらないと」「休んでいる場合じゃない」——このループが止まらないのは、意志が弱いからではありません。潜在意識の深いところに「頑張らないと失う」「手を抜いたら崩れる」という不足感が刻まれているからです。<br><br>この信念がある限り、休もうとするたびに罪悪感が出て、頑張り続けるしかなくなります。表面でいくら「頑張らなくていい」と言い聞かせても、根っこが変わらなければ何も変わりません。</p>
+      </div>
+
+      <div class="arrow-center">↓</div>
+
+      <div class="qualia-box">
+        <div class="qualia-label">鍵となる概念 — クオリア</div>
+        <div class="qualia-title">「何もしなくても大丈夫」という状態が、<br>何もしなくてもうまくいく世界を作る</div>
+        <p class="qualia-text">クオリアとは、主観的な「体験の質」のこと。頑張ることから自由になった状態とは——「今、何もしなくても大丈夫」という感覚です。<br><br>この状態になると、行動は義務ではなく選択になります。「やりたいからやる」だけになり、消耗がなくなる。そしてその軽さの中でこそ、本当に必要なものが自然と引き寄せられてくるのです。</p>
+      </div>
+
+      <div class="compare">
+        <div class="c-card c-ng">
+          <div class="c-label">頑張らないといけない状態</div>
+          <div class="c-item">休むたびに罪悪感が出る</div>
+          <div class="c-item">「まだ足りない」が止まらない</div>
+          <div class="c-item">努力しているのに報われない感覚</div>
+          <div class="c-item">いつも消耗している</div>
+        </div>
+        <div class="c-card c-ok">
+          <div class="c-label">何もしなくていい状態</div>
+          <div class="c-item">休むことに罪悪感がない</div>
+          <div class="c-item">「これでいい」が自然に出てくる</div>
+          <div class="c-item">力を抜いていても物事が動く</div>
+          <div class="c-item">エネルギーが自然と満ちてくる</div>
+        </div>
+      </div>
+
+      <div class="arrow-center">↓</div>
+
+      <div class="method-box">
+        <div class="block-label">解決策</div>
+        <div class="block-title">意志の力を使わずに、「頑張らないといけない」の根っこを書き換える</div>
+        <p class="block-text">「頑張ることをやめよう」と意志で決めても変わりません。それは表面を塗り替えるだけで、根っこは残り続けます。だから必要なのは「根っこから外す方法」です。</p>
+        <div class="method-steps">
+          <div class="m-step">
+            <div class="m-num">1</div>
+            <div class="m-text"><strong>たった一つのトレーニングをただ続けるだけ</strong><br>複雑な手順は不要。シンプルな方法を繰り返すことで、潜在意識の「頑張らないといけない」が自然に緩んでいきます。</div>
+          </div>
+          <div class="m-step">
+            <div class="m-num">2</div>
+            <div class="m-text"><strong>「足りない」という癖を外す</strong><br>問題は努力量でも意志の強さでもなく、心の癖。この癖に気づいて手放すだけで、頑張らなくても物事が動き始めます。</div>
+          </div>
+          <div class="m-step">
+            <div class="m-num">3</div>
+            <div class="m-text"><strong>早い人は1日で変化を感じられる</strong><br>難しいことは何もありません。やり続けるだけで、「何もしなくても大丈夫」な自分が現れてきます。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="result-label">実績 — おおぞら自身の変化</div>
+        <div class="result-stat">
+          <div class="result-num">0</div>
+          <div class="result-unit">「頑張らないといけない」という感覚</div>
+        </div>
+        <p class="result-text">「何もしなくても大丈夫」という状態になったとき、不思議なことが起き始めました。力を抜いているのに、必要なものが自然と引き寄せられてくる。頑張っていたときよりも、ずっと豊かになった感覚がありました。</p>
+      </div>
+
+      <div class="easy-box">
+        <p class="easy-text"><strong>これ以上頑張る必要はありません。</strong> 新しいスキルも、強い意志も必要ありません。ただ一つのことをやり続けるだけ。それだけで、力を抜いても大丈夫な自分が現れてきます。</p>
+      </div>
+
+      <div class="video-cta">
+        <div class="video-cta-title">まず無料動画で「頑張ることをやめる方法」の全体像を掴む</div>
+        <div class="video-cta-sub">なぜ頑張ることをやめられないのか、何をどう変えればいいか、具体的な方法を動画で解説しています。</div>
+        <a href="#action" class="btn-primary">無料動画を今すぐ受け取る</a>
+        <div class="btn-sub">登録1分・しつこい営業は一切ありません</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- O: Offer -->
+<div class="sec-offer">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:8px;line-height:1.5;">無料動画で学んだあと、<br>さらに深めたい方へ</h2>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;line-height:1.8;">動画教材では、潜在意識×頑張り癖×自由の関係を体系的に解説。実際に不足感を外すトレーニングも収録しています。</p>
+      <div class="offer-card">
+        <div class="offer-tag">動画教材</div>
+        <div class="offer-name">頑張ることをやめて、何もしなくてもうまくいく 潜在意識リセットプログラム</div>
+        <p class="offer-desc">潜在意識の「頑張らないといけない」癖を心理学で解体し、力を抜いても物事が動く状態を作る動画講座。クオリアを高めるトレーニング音声も収録。</p>
+        <div class="offer-price-label">価格</div>
+        <div class="offer-price">¥〇〇,000 <span>（税込）</span></div>
+        <div class="offer-features">
+          <div class="offer-feat"><span class="feat-check">✓</span> 無期限視聴・追加費用なし</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 潜在意識トレーニング音声データ付き</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 仕事・ビジネス・日常生活すべてに対応</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 購入後7日間返金保証</div>
+        </div>
+        <a href="#action" class="btn-primary" style="display:block;text-align:center;padding:14px;">教材を購入する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- N: Narrowing -->
+<div class="sec-narrow">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:20px;line-height:1.5;">こんな方のために作りました</h2>
+      <div class="narrow-grid">
+        <div class="narrow-card">
+          <div class="narrow-title nt-yes">✓ こんな人に向いています</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>頑張り続けることに疲れ果てている</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>休もうとすると罪悪感が出る</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>力を抜いた状態でうまくいくイメージがない</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>潜在意識を使って楽に生きたい</div>
+        </div>
+        <div class="narrow-card">
+          <div class="narrow-title nt-no">✗ こんな方には向きません</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>さらに頑張るための方法を探している</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>時間管理テクニックを求めている</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>心の状態が原因だと思っていない</div>
+        </div>
+      </div>
+      <div class="testimonials">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">「ずっと頑張ることが正しいと思っていました。でも潜在意識の癖だとわかったとき、すごく楽になりました。今は力を抜いているのに、物事がうまく動いている感覚があります。」</p>
+          <div class="t-name">— Aさん（30代・会社員）</div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">「休むことに罪悪感があって、ずっとしんどかった。これは意志の問題じゃなくて潜在意識の癖なんですね。外し方がわかって、初めてちゃんと休める気がしています。」</p>
+          <div class="t-name">— Bさん（40代・フリーランス）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Action -->
+<div class="sec-action" id="action">
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="cta-headline">もう、頑張らなくていい。<br>まず無料動画で「その方法」を知ってください。</h2>
+      <p class="cta-sub">メールアドレスを登録するだけ。すぐに視聴できます。<br>しつこいセールスは一切しません。</p>
+      <a href="#" class="btn-cta">無料動画を今すぐ受け取る</a>
+      <div class="btn-note">登録1分・いつでも解除できます</div>
+
+      <div class="faq">
+        <div class="faq-title">よくある質問</div>
+        <div class="faq-item">
+          <div class="faq-q">頑張ることをやめたら、本当に何かを失いませんか？</div>
+          <p class="faq-a">「頑張らないと失う」という感覚自体が潜在意識の癖です。実際には、力を抜くことで引き寄せられるものが増え始めます。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">意志が弱い私でもできますか？</div>
+          <p class="faq-a">意志の力は使いません。むしろ意志で頑張ることをやめようとすること自体が間違いです。潜在意識レベルの癖を外す方法なので、意志の強さは関係ありません。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">心理学の知識がなくてもわかりますか？</div>
+          <p class="faq-a">専門知識は不要です。実際の体験談をもとに、日常の言葉でわかりやすく解説しています。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">どのくらいで変化を感じられますか？</div>
+          <p class="faq-a">個人差はありますが、早い方は1日で変化を感じていただけます。難しいことは何もなく、一つのことを続けるだけです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="#" class="footer-link">プライバシーポリシー</a>
+    <a href="#" class="footer-link">特定商取引法に基づく表記</a>
+    <a href="contact.html" class="footer-link">お問い合わせ</a>
+  </div>
+  <div class="footer-text">© 2025 おおぞら</div>
+</footer>
+
+</body>
+</html>
