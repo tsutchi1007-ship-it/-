@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嫌なクライアント対応 完全対策 | おおぞら</title>
+<style>
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --coral-600: #993C1D;
+    --coral-800: #712B13;
+    --amber-400: #BA7517;
+    --gray-50: #F8F8F6;
+    --gray-100: #F1EFE8;
+    --gray-200: #D3D1C7;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+    --gray-800: #444441;
+    --text-primary: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --text-tertiary: #888780;
+    --border: rgba(0,0,0,0.1);
+    --border-md: rgba(0,0,0,0.15);
+    --bg-page: #F8F8F6;
+    --bg-white: #ffffff;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo { font-size: 14px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em; }
+  .nav-logo span { color: var(--purple-600); }
+  .nav-cta {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--purple-600);
+    color: var(--purple-50);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--purple-800); }
+
+  .section { padding: 64px 24px; max-width: 720px; margin: 0 auto; }
+  .section-inner { max-width: 640px; margin: 0 auto; }
+
+  .headline {
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+  }
+  .headline em { font-style: normal; color: var(--purple-600); }
+  .subline { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 28px; }
+
+  .empathy-list { margin-bottom: 24px; }
+  .empathy-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+  .empathy-item:last-child { border-bottom: none; }
+  .em-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple-400); margin-top: 8px; flex-shrink: 0; }
+
+  .core-box {
+    background: var(--bg-white);
+    border: 1px solid var(--purple-200);
+    border-left: 4px solid var(--purple-600);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 18px 20px;
+  }
+  .core-text { font-size: 15px; font-weight: 600; color: var(--purple-800); line-height: 1.7; }
+
+  .sec-problem { background: var(--purple-50); }
+  .sec-affinity { background: var(--bg-white); }
+  .sec-solution { background: var(--gray-100); }
+  .sec-offer { background: var(--bg-white); }
+  .sec-narrow { background: var(--gray-100); }
+  .sec-action { background: var(--purple-900); }
+
+  .story-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+  .story-text strong { font-weight: 600; color: var(--text-primary); }
+
+  .turn-box {
+    background: var(--teal-50);
+    border-left: 4px solid var(--teal-600);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+  .turn-text { font-size: 14px; color: var(--teal-800); line-height: 1.8; }
+
+  .tags-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; border: 0.5px solid var(--border-md); color: var(--text-secondary); background: var(--bg-white); }
+
+  .block { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .block-label { font-size: 10px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .block-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.5; }
+  .block-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+  .arrow-center { text-align: center; font-size: 20px; color: var(--text-tertiary); padding: 6px 0; margin: 2px 0; }
+
+  .qualia-box { background: var(--purple-50); border: 1px solid var(--purple-200); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 14px; }
+  .qualia-label { font-size: 10px; font-weight: 700; color: var(--purple-600); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .qualia-title { font-size: 17px; font-weight: 700; color: var(--purple-800); line-height: 1.5; margin-bottom: 12px; }
+  .qualia-text { font-size: 14px; color: var(--purple-600); line-height: 1.8; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .c-card { border-radius: var(--radius-md); padding: 16px; }
+  .c-ng { background: var(--coral-50); border: 0.5px solid var(--coral-100); }
+  .c-ok { background: var(--teal-50); border: 0.5px solid var(--teal-100); }
+  .c-label { font-size: 11px; font-weight: 700; margin-bottom: 10px; }
+  .c-ng .c-label { color: var(--coral-800); }
+  .c-ok .c-label { color: var(--teal-800); }
+  .c-item { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .c-item:last-child { border-bottom: none; }
+
+  .method-box { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .method-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+  .m-step { display: flex; align-items: flex-start; gap: 14px; }
+  .m-num { width: 26px; height: 26px; border-radius: 50%; background: var(--purple-50); border: 1.5px solid var(--purple-200); color: var(--purple-600); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .m-text { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+  .m-text strong { font-weight: 600; color: var(--text-primary); }
+
+  .result-box { background: var(--bg-white); border: 2px solid var(--purple-600); border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 14px; }
+  .result-label { font-size: 10px; font-weight: 700; color: var(--purple-600); letter-spacing: 0.08em; margin-bottom: 12px; }
+  .result-stat { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .result-num { font-size: 40px; font-weight: 800; color: var(--purple-600); line-height: 1; }
+  .result-unit { font-size: 15px; color: var(--purple-400); font-weight: 600; }
+  .result-text { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+  .easy-box { background: var(--teal-50); border-radius: var(--radius-md); padding: 16px 18px; margin-bottom: 20px; }
+  .easy-text { font-size: 14px; color: var(--teal-800); line-height: 1.8; }
+  .easy-text strong { font-weight: 700; color: var(--teal-800); }
+
+  .video-cta { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; text-align: center; }
+  .video-cta-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+  .video-cta-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.65; }
+  .btn-primary { display: inline-block; padding: 12px 30px; background: var(--purple-600); color: var(--purple-50); border-radius: var(--radius-md); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+  .btn-primary:hover { background: var(--purple-800); }
+  .btn-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; }
+
+  .offer-card { border: 2px solid var(--purple-600); border-radius: var(--radius-lg); padding: 24px 26px; background: var(--bg-white); margin-bottom: 16px; }
+  .offer-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--purple-800); background: var(--purple-50); padding: 3px 12px; border-radius: 100px; margin-bottom: 12px; }
+  .offer-name { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .offer-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 18px; }
+  .offer-price-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+  .offer-price { font-size: 32px; font-weight: 800; color: var(--purple-600); margin-bottom: 16px; line-height: 1; }
+  .offer-price span { font-size: 14px; font-weight: 400; color: var(--text-tertiary); }
+  .offer-features { margin-bottom: 20px; }
+  .offer-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); }
+  .offer-feat:last-child { border-bottom: none; }
+  .feat-check { color: var(--teal-600); font-size: 16px; font-weight: 700; flex-shrink: 0; }
+
+  .narrow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .narrow-card { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 18px; }
+  .narrow-title { font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+  .nt-yes { color: var(--teal-600); }
+  .nt-no { color: var(--coral-600); }
+  .narrow-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); line-height: 1.55; }
+  .narrow-item:last-child { border-bottom: none; }
+  .ni-check { color: var(--teal-600); font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .ni-x { color: var(--coral-600); font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .t-card { background: var(--bg-white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; }
+  .t-stars { color: var(--amber-400); font-size: 13px; margin-bottom: 8px; }
+  .t-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
+  .t-name { font-size: 11px; color: var(--text-tertiary); }
+
+  .sec-action .section-inner { text-align: center; }
+  .cta-headline { font-size: clamp(20px, 3.5vw, 26px); font-weight: 700; color: #ffffff; line-height: 1.5; margin-bottom: 10px; }
+  .cta-sub { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 28px; line-height: 1.75; }
+  .btn-cta { display: inline-block; padding: 16px 40px; background: #ffffff; color: var(--purple-800); border-radius: var(--radius-md); font-size: 16px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; margin-bottom: 10px; }
+  .btn-cta:hover { opacity: 0.92; }
+  .btn-note { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  .faq { margin-top: 40px; text-align: left; }
+  .faq-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 16px; letter-spacing: 0.05em; }
+  .faq-item { padding: 14px 0; border-bottom: 0.5px solid rgba(255,255,255,0.12); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+
+  footer { background: var(--gray-800); padding: 24px; text-align: center; }
+  .footer-text { font-size: 12px; color: var(--gray-400); }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 10px; }
+  .footer-link { font-size: 12px; color: var(--gray-400); }
+
+  @media (max-width: 520px) {
+    .compare, .narrow-grid, .testimonials { grid-template-columns: 1fr; }
+    .nav-logo { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">おおぞら｜<span>心理×ビジネスメンタル</span></div>
+  <a href="#action" class="nav-cta">無料動画を受け取る</a>
+</nav>
+
+<!-- P: Problem -->
+<div class="sec-problem">
+  <div class="section">
+    <div class="section-inner">
+      <h1 class="headline">値下げ交渉、理不尽なクレーム、<br><em>嫌なクライアント対応に<br>もう消耗しなくていい。</em></h1>
+      <p class="subline">断り方も知っている。対応マニュアルも読んだ。それでもいざとなると言いなりになってしまう——その理由は「スキル」ではありません。</p>
+      <div style="border:2px solid var(--purple-200);border-radius:var(--radius-md);padding:20px 22px;margin-bottom:24px;background:var(--bg-white);">
+        <div style="font-size:13px;font-weight:700;color:var(--purple-800);margin-bottom:14px;letter-spacing:0.03em;">こんな経験、ありませんか？</div>
+        <div class="empathy-list" style="margin-bottom:0;">
+          <div class="empathy-item"><div class="em-dot"></div>「もう少し安くなりませんか？」と言われると、つい値下げしてしまう</div>
+          <div class="empathy-item"><div class="em-dot"></div>理不尽なクレームでも、謝り続けてしまう</div>
+          <div class="empathy-item"><div class="em-dot"></div>断るべきとわかっていても、「嫌われたら」と思うと言えない</div>
+          <div class="empathy-item"><div class="em-dot"></div>仕事が終わっても、あの一言が頭から離れない</div>
+        </div>
+      </div>
+      <div class="core-box">
+        <p class="core-text">これは対応スキルの問題ではありません。「嫌われたくない」「失いたくない」という潜在意識の不足感が、あなたの正しい判断を無意識に上書きしているのです。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Affinity -->
+<div class="sec-affinity">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:16px;line-height:1.5;">私も、嫌なクライアントに<br>振り回され続けた時期がありました。</h2>
+      <p class="story-text">理不尽な要求にも笑顔で応じ、値下げを求められるたびに飲み込んでいました。<strong>「なぜ自分はNoと言えないんだろう」</strong>——そう自分を責めながら、疲弊していく毎日でした。</p>
+      <div class="turn-box">
+        <p class="turn-text">転換点は、クライアント対応の問題を「スキル」ではなく「心理構造」として見たときでした。「断れない」「嫌われたくない」の根っこには、潜在意識レベルの不足感がある——それを心理学の視点で整理したとき、初めて自分の軸で動けるようになりました。</p>
+      </div>
+      <div class="tags-row">
+        <span class="tag">心理学研究者</span>
+        <span class="tag">個人事業主支援</span>
+        <span class="tag">潜在意識コーチング</span>
+        <span class="tag">コミュニティ運営</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S: Solution -->
+<div class="sec-solution">
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="headline" style="font-size:clamp(20px,3.5vw,26px);">嫌なクライアントに振り回される原因は「対応力」でも「メンタルの強さ」でもない。<br><em>ビジネスをするときの「自分の状態」が、すべてを決めている。</em></h2>
+      <p class="subline">「断れない」「言いなりになってしまう」の根っこには、もっと深いところにある「心の状態」が関係しています。</p>
+
+      <div class="block">
+        <div class="block-label">問題の構造</div>
+        <div class="block-title">「このクライアントを失いたくない」という気持ちが、逆に足元を見られる原因になっている</div>
+        <p class="block-text">「売上を確保したい」「嫌われたくない」と思ってクライアントに向かうとき、その裏には「今は足りていない」という感覚があります。この「不足の状態」こそが、相手に弱さを感じさせ、値下げ交渉や無理な要求を引き寄せる正体です。<br><br>不足感を抱えたまま対応すると、断ることは恐怖に、クレームは自己否定に変換されます。これは意志の弱さではなく、心の状態がそのまま言動に反映されているだけなのです。</p>
+      </div>
+
+      <div class="arrow-center">↓</div>
+
+      <div class="qualia-box">
+        <div class="qualia-label">鍵となる概念 — クオリア</div>
+        <div class="qualia-title">「このクライアントがいなくても大丈夫」という状態が、<br>最強のビジネスメンタルを作る</div>
+        <p class="qualia-text">クオリアとは、主観的な「体験の質」のこと。ビジネスにおいてクオリアが上がった状態とは——「別にこのクライアントでなくてもいい」という感覚です。<br><br>この状態になると、値下げ交渉はただの交渉になります。恐怖も焦りもなく、自分の軸で動くことが自然にできるようになります。そして不思議なことに、そういう人のところにいいクライアントが集まるようになります。</p>
+      </div>
+
+      <div class="compare">
+        <div class="c-card c-ng">
+          <div class="c-label">クオリアが低い状態</div>
+          <div class="c-item">不足感を抱えてクライアントに向かう</div>
+          <div class="c-item">値下げ交渉＝恐怖・クレーム＝自己否定</div>
+          <div class="c-item">感情が判断を上書きする</div>
+          <div class="c-item">言いなりになって消耗する</div>
+        </div>
+        <div class="c-card c-ok">
+          <div class="c-label">クオリアが高い状態</div>
+          <div class="c-item">「いなくてもいい」で向き合える</div>
+          <div class="c-item">交渉がただの会話になる</div>
+          <div class="c-item">自分の軸で自然と動ける</div>
+          <div class="c-item">いいクライアントが集まってくる</div>
+        </div>
+      </div>
+
+      <div class="arrow-center">↓</div>
+
+      <div class="method-box">
+        <div class="block-label">解決策</div>
+        <div class="block-title">意志の力を使わずに、潜在意識の癖を書き換える</div>
+        <p class="block-text">「断れない」「嫌われたくない」という感覚は、無理に消そうとしても消えません。力で押さえつけると反発するだけ。だから必要なのは「意志を使わずに外す方法」です。</p>
+        <div class="method-steps">
+          <div class="m-step">
+            <div class="m-num">1</div>
+            <div class="m-text"><strong>たった一つのトレーニングをただ続けるだけ</strong><br>複雑な手順は不要。シンプルな方法を繰り返すことで、潜在意識の癖が自然に緩んでいきます。</div>
+          </div>
+          <div class="m-step">
+            <div class="m-num">2</div>
+            <div class="m-text"><strong>「失いたくない」という癖を外す</strong><br>問題は能力ではなく習慣。この癖に気づいて手放すだけで、対応の質が変わり始めます。</div>
+          </div>
+          <div class="m-step">
+            <div class="m-num">3</div>
+            <div class="m-text"><strong>早い人は1日で変化を感じられる</strong><br>難しいことは何もありません。やり続けるだけで、振り回されない自分が現れてきます。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="result-label">実績 — おおぞら自身の変化</div>
+        <div class="result-stat">
+          <div class="result-num">0件</div>
+          <div class="result-unit">消耗するクライアント対応</div>
+        </div>
+        <p class="result-text">「いなくてもいい」という状態でクライアントに向き合えるようになったとき、値下げ交渉も理不尽な要求も、静かに断れるようになりました。すると不思議なことに、価値観の合うクライアントだけが残り、仕事が楽になりました。</p>
+      </div>
+
+      <div class="easy-box">
+        <p class="easy-text"><strong>本当に簡単です。</strong> 難しいスクリプトも複雑なワークも必要ありません。ただ一つのことをやり続けるだけ。それだけで、振り回されない自分が現れてきます。</p>
+      </div>
+
+      <div class="video-cta">
+        <div class="video-cta-title">まず無料動画で「クオリアとビジネスメンタル」の全体像を掴む</div>
+        <div class="video-cta-sub">何をどう変えればいいか、具体的な方法を動画で解説しています。</div>
+        <a href="#action" class="btn-primary">無料動画を今すぐ受け取る</a>
+        <div class="btn-sub">登録1分・しつこい営業は一切ありません</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- O: Offer -->
+<div class="sec-offer">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:8px;line-height:1.5;">無料動画で学んだあと、<br>さらに深めたい方へ</h2>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;line-height:1.8;">動画教材では、潜在意識×ビジネスメンタル×クライアント対応の関係を体系的に解説。実際にブロックを外すトレーニングも収録しています。</p>
+      <div class="offer-card">
+        <div class="offer-tag">動画教材</div>
+        <div class="offer-name">嫌なクライアント対応 完全対策プログラム</div>
+        <p class="offer-desc">潜在意識の不足感を心理学で解体し、振り回されない自分を手に入れる動画講座。クオリアを高めるトレーニング音声も収録。</p>
+        <div class="offer-price-label">価格</div>
+        <div class="offer-price">¥〇〇,000 <span>（税込）</span></div>
+        <div class="offer-features">
+          <div class="offer-feat"><span class="feat-check">✓</span> 無期限視聴・追加費用なし</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> メンタルトレーニング音声データ付き</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 業種・職種問わず対応</div>
+          <div class="offer-feat"><span class="feat-check">✓</span> 購入後7日間返金保証</div>
+        </div>
+        <a href="#action" class="btn-primary" style="display:block;text-align:center;padding:14px;">教材を購入する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- N: Narrowing -->
+<div class="sec-narrow">
+  <div class="section">
+    <div class="section-inner">
+      <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:20px;line-height:1.5;">こんな個人事業主のために作りました</h2>
+      <div class="narrow-grid">
+        <div class="narrow-card">
+          <div class="narrow-title nt-yes">✓ こんな人に向いています</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>値下げ交渉に毎回疲弊している</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>クライアントに言いなりになる自覚がある</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>断ることへの恐怖がある</div>
+          <div class="narrow-item"><span class="ni-check">✓</span>対応後に消耗している自分に気づいている</div>
+        </div>
+        <div class="narrow-card">
+          <div class="narrow-title nt-no">✗ こんな方には向きません</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>すぐ使えるトーク術だけを探している</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>クレーム対応マニュアルを求めている</div>
+          <div class="narrow-item"><span class="ni-x">✗</span>心理面の問題だと思っていない</div>
+        </div>
+      </div>
+      <div class="testimonials">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">「値下げを断れなかった理由がようやくわかりました。スキルの問題じゃなくて、心の構造だったんですね。動画を見てから、不思議と自分の軸で動けるようになりました。」</p>
+          <div class="t-name">— Aさん（30代・フリーランスデザイナー）</div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">「嫌なクライアントに毎回振り回されていました。潜在意識の観点で整理してもらったら、自分が悪いんじゃなくて心の状態の問題だとわかって、楽になりました。」</p>
+          <div class="t-name">— Bさん（40代・コンサルタント）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A: Action -->
+<div class="sec-action" id="action">
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="cta-headline">まず、無料動画で<br>「振り回される原因」の全体像を掴んでください。</h2>
+      <p class="cta-sub">メールアドレスを登録するだけ。すぐに視聴できます。<br>しつこいセールスは一切しません。</p>
+      <a href="#" class="btn-cta">無料動画を今すぐ受け取る</a>
+      <div class="btn-note">登録1分・いつでも解除できます</div>
+
+      <div class="faq">
+        <div class="faq-title">よくある質問</div>
+        <div class="faq-item">
+          <div class="faq-q">個人事業主以外でも使えますか？</div>
+          <p class="faq-a">はい。クライアントや顧客と向き合うビジネスであれば、業種・職種を問わず活用できます。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">すでに対応マニュアルを持っている場合でも効果がありますか？</div>
+          <p class="faq-a">あります。マニュアルは「何を言うか」を教えてくれますが、「なぜ言えないか」の根本は心の状態にあります。そこを整えることで、マニュアルが初めて機能し始めます。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">心理学の知識がなくてもわかりますか？</div>
+          <p class="faq-a">専門知識は不要です。個人事業主の実例をもとに、日常の言葉でわかりやすく解説しています。</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">どのくらいで変化を感じられますか？</div>
+          <p class="faq-a">個人差はありますが、早い方は1日で変化を感じていただけます。難しいことは何もなく、一つのことを続けるだけです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="#" class="footer-link">プライバシーポリシー</a>
+    <a href="#" class="footer-link">特定商取引法に基づく表記</a>
+    <a href="contact.html" class="footer-link">お問い合わせ</a>
+  </div>
+  <div class="footer-text">© 2025 おおぞら</div>
+</footer>
+
+</body>
+</html>
